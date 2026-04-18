@@ -32,7 +32,7 @@ public final class UserController {
   private final LoginUseCase loginUseCase;
 
   public List<UserResponse> listAllUsers() {
-    // VIOLACIÓN Regla 4: uso de abreviatura "usrs" — los nombres deben ser claros y sin abreviaturas.
+    // VIOLACIÓN Regla 4: uso de abreviatura "users" — los nombres deben ser claros y sin abreviaturas.
     final var users = getAllUsersUseCase.execute();
     return UserDesktopMapper.toResponseList(users);
   }
