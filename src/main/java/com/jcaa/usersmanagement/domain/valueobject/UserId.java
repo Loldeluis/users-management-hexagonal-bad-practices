@@ -1,6 +1,7 @@
 package com.jcaa.usersmanagement.domain.valueobject;
 
 import com.jcaa.usersmanagement.domain.exception.InvalidUserIdException;
+import java.util.Objects;
 
 public record UserId(String value) {
 

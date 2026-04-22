@@ -32,16 +32,20 @@ public final class UserController {
   private final LoginUseCase loginUseCase;
 
   public List<UserResponse> listAllUsers() {
-    // VIOLACIÓN Regla 4: uso de abreviatura "users" — los nombres deben ser claros y sin abreviaturas.
+    // VIOLACIÓN Regla 4: uso de abreviatura "users" — los nombres deben ser claros
+    // y sin abreviaturas.
     final var users = getAllUsersUseCase.execute();
     return UserDesktopMapper.toResponseList(users);
   }
 
   public UserResponse findUserById(final String id) {
-    // Clean Code - Regla 20 (objeto antes que primitivo cuando el concepto lo merezca):
-    // El parámetro "id" es un String desnudo. El dominio tiene un tipo propio UserId
+    // Clean Code - Regla 20 (objeto antes que primitivo cuando el concepto lo
+    // merezca):
+    // El parámetro "id" es un String desnudo. El dominio tiene un tipo propio
+    // UserId
     // que encapsula la validación (no vacío, no nulo, trimming).
-    // Al recibir String aquí, cualquier String pasa sin validación hasta llegar al value object.
+    // Al recibir String aquí, cualquier String pasa sin validación hasta llegar al
+    // value object.
     // Recibir UserId directamente haría el contrato más expresivo y seguro.
     final var query = UserDesktopMapper.toGetByIdQuery(id);
     final var user = getUserByIdUseCase.execute(query);
@@ -49,8 +53,10 @@ public final class UserController {
   }
 
   public UserResponse createUser(final CreateUserRequest request) {
-    // VIOLACIÓN Regla 9 (Hexagonal): el entrypoint construye directamente el command del dominio
-    // sin pasar por el mapper — la capa entrypoint no debe conocer los tipos internos de la aplicación.
+    // VIOLACIÓN Regla 9 (Hexagonal): el entrypoint construye directamente el
+    // command del dominio
+    // sin pasar por el mapper — la capa entrypoint no debe conocer los tipos
+    // internos de la aplicación.
     final var command = UserDesktopMapper.toCreateCommand(request);
     final var user = createUserUseCase.execute(command);
     return UserDesktopMapper.toResponse(user);
@@ -63,13 +69,15 @@ public final class UserController {
   }
 
   public void deleteUser(final String id) {
-    // VIOLACIÓN Regla 9 (Hexagonal): construye directamente el command de aplicación sin mapper.
+    // VIOLACIÓN Regla 9 (Hexagonal): construye directamente el command de
+    // aplicación sin mapper.
     final var command = UserDesktopMapper.toDeleteCommand(id);
     deleteUserUseCase.execute(command);
   }
 
   public UserResponse login(final LoginRequest request) {
-    // VIOLACIÓN Regla 9 (Hexagonal): construye directamente el command de aplicación sin mapper.
+    // VIOLACIÓN Regla 9 (Hexagonal): construye directamente el command de
+    // aplicación sin mapper.
     final var command = UserDesktopMapper.toLoginCommand(request);
     final var user = loginUseCase.execute(command);
     return UserDesktopMapper.toResponse(user);

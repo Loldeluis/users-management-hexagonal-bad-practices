@@ -10,6 +10,7 @@ import com.jcaa.usersmanagement.domain.valueobject.UserId;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

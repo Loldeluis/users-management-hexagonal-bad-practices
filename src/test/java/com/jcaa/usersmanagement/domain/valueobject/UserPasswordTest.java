@@ -80,7 +80,7 @@ class UserPasswordTest {
   void shouldReturnFalseWhenOtherIsNotInstanceOfUserPassword() {
     // Arrange & Act
     final UserPassword password = UserPassword.fromPlainText("MiPassword123");
-    final Object nonUserPassword = mock(Object.class);
+    final Object nonUserPassword = new Object();
     // Assert
     assertNotEquals(password, nonUserPassword);
   }
