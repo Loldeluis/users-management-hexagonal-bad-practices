@@ -14,17 +14,18 @@ class UserPasswordTest {
 
   // VIOLACIÓN Regla 11: falta @DisplayName en el test parametrizado.
   @ParameterizedTest
-  @ValueSource(strings = {"password123", "   password123   "})
+  @ValueSource(strings = { "password123", "   password123   " })
   void shouldNormalizeAndHashPassword(final String input) {
     // VIOLACIÓN Regla 11: se eliminaron los comentarios Arrange–Act–Assert.
     final UserPassword result = UserPassword.fromPlainText(input);
-    // VIOLACIÓN Regla 11: assertTrue(result.value() != null) en lugar de assertNotNull.
+    // VIOLACIÓN Regla 11: assertTrue(result.value() != null) en lugar de
+    // assertNotNull.
     assertTrue(result.value() != null);
     assertNotEquals(input.trim(), result.value());
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"clave", "    clave     "})
+  @ValueSource(strings = { "clave", "    clave     " })
   @DisplayName("Valida que el password no tenga menos de 8 caracteres después normalizarlo")
   void shouldFailWhenPasswordIsTooShort(final String password) {
     // Act & Assert
@@ -32,7 +33,7 @@ class UserPasswordTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"", "  ", "\r", "\t", "\n", "\f", "\b", "\0"})
+  @ValueSource(strings = { "", "  ", "\r", "\t", "\n", "\f", "\b", "\0" })
   @DisplayName("Valida que el password no sea vacio o solo espacios en blanco")
   void shouldThrowWhenPasswordIsEmptyOrBlank(final String password) {
     // Act & Assert
@@ -80,7 +81,7 @@ class UserPasswordTest {
   void shouldReturnFalseWhenOtherIsNotInstanceOfUserPassword() {
     // Arrange & Act
     final UserPassword password = UserPassword.fromPlainText("MiPassword123");
-    final Object nonUserPassword = new Object();
+    final Object nonUserPassword = mock(Object.class);
     // Assert
     assertNotEquals(password, nonUserPassword);
   }
@@ -100,7 +101,7 @@ class UserPasswordTest {
   void shouldReturnConsistentHashCode() {
     // Arrange & Act
     UserPassword password = UserPassword.fromPlainText("MiPassword123");
-    //  Act
+    // Act
     final int firstHashCode = password.hashCode();
     final int secondHashCode = password.hashCode();
     // Assert

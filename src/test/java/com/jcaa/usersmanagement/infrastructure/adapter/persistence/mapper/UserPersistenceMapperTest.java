@@ -37,21 +37,21 @@ class UserPersistenceMapperTest {
   private static final String CREATED_AT = "2024-01-01 00:00:00";
   private static final String UPDATED_AT = "2024-01-02 00:00:00";
 
-  @Mock private ResultSet resultSet;
+  @Mock
+  private ResultSet resultSet;
 
   private UserModel userModel;
   private UserEntity userEntity;
 
   @BeforeEach
   void setUp() {
-    userModel =
-        new UserModel(
-            new UserId(ID),
-            new UserName(NAME),
-            new UserEmail(EMAIL),
-            UserPassword.fromHash(HASH),
-            UserRole.ADMIN,
-            UserStatus.ACTIVE);
+    userModel = new UserModel(
+        new UserId(ID),
+        new UserName(NAME),
+        new UserEmail(EMAIL),
+        UserPassword.fromHash(HASH),
+        UserRole.ADMIN,
+        UserStatus.ACTIVE);
 
     userEntity = new UserEntity(ID, NAME, EMAIL, HASH, ROLE, STATUS, CREATED_AT, UPDATED_AT);
   }

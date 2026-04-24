@@ -40,3 +40,7 @@ build/
 .idea/
 *.log
 
+### Archivos de explicacion y prueba ###
+Explicacion_Fixes_Profesor.html
+Explicacion_Fixes_Profesor.md
+test.md
